@@ -8,7 +8,7 @@
 #==============================================================================
 
 
-# Script written by Warith Al Maawali  
+# Script written by Warith Al Maawali  and Erik Alcantara
 # (c) 2022 Founder of Eagle Eye Digital Solutions
 # Discord channel https://discord.gg/KEFErEx
 # Twitter http://twitter.com/warith2020
@@ -41,11 +41,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 8BB158
-color2 7D7B7D
-color3 7D7B7D
-color4 FFFFFF 
-color5 353535 
+color1 3f43ff  #Info  letter color
+color2 000000  #Label letter color
+color3 000000  #Title letter color
+color4 FFFFFF  #None
+color5 ebedf1  #separator color
 
 
 
@@ -150,10 +150,4 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Swap encrypted: ${c
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}USB guarded: ${color1}${exec cat kodachi.json | jq -r .usbguardstatus|xargs}${alignr}${color3}${alignr}${color3}USB kill: ${color1}${exec cat kodachi.json | jq -r .usbkillstatus|xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Auto fonts: ${color1}${exec cat kodachi.json | jq -r .Forcefonts|xargs}${alignr}${color3}Font size: ${color1}${exec cat kodachi.json | jq -r .Screenfontsize|xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Script status: ${color1}${font Liberation Sans Narrow:size=10:bold}${exec cat kodachi.json | jq -r .healthsactionstatus|xargs}${alignr}${color3}Server load: ${color1}${exec cat kodachiweb.json | jq -r .cpuLoad|xargs}
-${color5}${stippled_hr}${font}${voffset -0}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Security score: ${alignr}${color1}${exec cat kodachi.json | jq -r .securityscore|xargs}/100
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Your model:${alignr}${color1}${exec cat kodachi.json | jq -r .securitymodel|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Privacy:${alignr}${color1}ISP->VPN->DNScrypt
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Anonymouse:${alignr}${color1}ISP->VPN->Torify->TorDNS
-#${color #585858}${texeci 1 echo 1 >> /home/$USER/.kbase/.countfile}   
-#${texeci 60 rm -f > /home/$USER/.kbase/.countfile}
+

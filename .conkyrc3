@@ -7,7 +7,7 @@
 #
 #==============================================================================
 
-# Script written by Warith Al Maawali  
+# Script written by Warith Al Maawali  and Erik Alcantara
 # (c) 2022 Founder of Eagle Eye Digital Solutions
 # Discord channel https://discord.gg/KEFErEx
 # Twitter http://twitter.com/warith2020
@@ -43,11 +43,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 8BB158
-color2 7D7B7D
-color3 7D7B7D
-color4 FFFFFF 
-color5 353535 
+color1 3f43ff  #Info  letter color
+color2 000000  #Label letter color
+color3 000000  #Title letter color
+color4 FFFFFF  #None
+color5 ebedf1  #separator color
 
 own_window_transparent yes 
 own_window_type normal
@@ -108,10 +108,7 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Screen resolution:$
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Kernel:${alignr}${color1}${kernel}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Random HWID: ${color1}${alignr}${exec cat kodachi.json |jq -r .jfakeidr|cut -c 1-21 |xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}HWID: ${color1}${alignr}${exec cat kodachi.json |jq -r .kodachihwid|cut -c 1-21 |xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}BTC donations: ${alignr}${color1}${exec cat kodachiweb.json | jq -r '.ServerFeed1[].walletBlance'|xargs} 
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Powered by:${alignr}${color1}${exec cat kodachiweb.json |jq -r .powerby|cut -c 1-21 |xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}BTC: ${color1}${exec cat kodachiweb.json |jq -r '.ServerFeed1[].btcPrice'|xargs|xargs}${alignr}${color3}XMR: ${color1}${exec cat kodachiweb.json |jq -r '.ServerFeed1[].xmrPrice'|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Developer:${alignr}${color1}${exec cat kodachiweb.json |jq -r .developer|cut -c 1-21 |xargs}
+
 
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}TRAFFIC ${color5}${stippled_hr}${font}${voffset -0}
 ${if_existing /proc/net/route wlan0}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}wlan0

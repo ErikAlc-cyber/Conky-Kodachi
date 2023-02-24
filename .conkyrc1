@@ -7,7 +7,7 @@
 #
 #==============================================================================
 
-# Script written by Warith Al Maawali  
+# Script written by Warith Al Maawali and Erik Alcantara
 # (c) 2022 Founder of Eagle Eye Digital Solutions
 # Discord channel https://discord.gg/KEFErEx
 # Twitter http://twitter.com/warith2020
@@ -42,11 +42,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 8BB158
-color2 7D7B7D
-color3 7D7B7D
-color4 FFFFFF 
-color5 353535 
+color1 3f43ff  #Info  letter color
+color2 000000  #Label letter color
+color3 000000  #Title letter color
+color4 FFFFFF  #None
+color5 ebedf1  #separator color
 
 own_window_transparent yes
 own_window_type normal
