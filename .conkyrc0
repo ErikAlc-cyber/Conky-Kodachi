@@ -24,7 +24,7 @@
 
 
 # Specific
-gap_x 500
+gap_x 1000
 gap_y 30
 update_interval 10
 minimum_size 180 320
@@ -50,12 +50,12 @@ color4 FFFFFF
 color5 353535 
 color6 FFD700
 
-own_window_transparent yes 
+own_window_transparent yes
 own_window_type normal
-own_window_argb_visual yes 
+own_window_argb_visual yes
 own_window_class override
 own_window yes
-own_window_argb_value 90 #value glass 0-250 full #own_window_argb_visual yes
+own_window_argb_value 0
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
 total_run_times 0
@@ -74,7 +74,7 @@ border_width 3
 default_color 05FBE8
 #default_shade_color black
 #default_outline_color grey
-own_window_colour black
+own_window_colour 000000
 
 #Text alignment, other possible values are commented
 #alignment top_left

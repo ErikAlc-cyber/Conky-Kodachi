@@ -43,11 +43,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 3f43ff  #Info  letter color
-color2 000000  #Label letter color
-color3 000000  #Title letter color
-color4 FFFFFF  #None
-color5 ebedf1  #separator color
+color1 white  #Info  letter color
+color2 FFA300  #Label letter color
+color3 FFA300  #Title letter color
+color4 EAEAEA  #None
+color5 grey  #separator color
 
 own_window_transparent yes 
 own_window_type normal
@@ -98,7 +98,7 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}SYSTEM ${color5}${s
 #${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Distro:${alignr}${color1}${exec cat /etc/issue.net}
 #Cancelled vars #$machine  #${nodename} #$machine
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Files: ${color1}${exec cat kodachi.json |jq -r .openfiles|xargs}${alignr}${color3}Threads: ${color1}${alignr}${threads}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Processes:${color1}${alignr}$running_processes/$processes
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Processes:${color1}${alignr}${running_processes}/${processes}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS uptime:${color1}${alignr}${uptime_short}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS timezone:${color1}${alignr}${exec timedatectl status | grep 'Time zone:' |awk '{print $3}'}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Time: ${color1}${time %H-%M}${alignr}${color3}Date: ${color1}${time %d-%m-%Y}
@@ -108,8 +108,6 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Screen resolution:$
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Kernel:${alignr}${color1}${kernel}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Random HWID: ${color1}${alignr}${exec cat kodachi.json |jq -r .jfakeidr|cut -c 1-21 |xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}HWID: ${color1}${alignr}${exec cat kodachi.json |jq -r .kodachihwid|cut -c 1-21 |xargs}
-
-
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}TRAFFIC ${color5}${stippled_hr}${font}${voffset -0}
 ${if_existing /proc/net/route wlan0}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}wlan0
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Up:${color1}${alignr}${upspeed wlan0}
@@ -117,6 +115,13 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Down:${color1}${a
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Upload:${color1}${alignr}${totalup wlan0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Download:${color1}${alignr}${totaldown wlan0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Ip:${color1} ${alignr}${addr wlan0}
+${color5}${stippled_hr}${font}${voffset -0}
+${else}${if_existing /proc/net/route eno1}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}eno1
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Up:${color1}${alignr}${upspeed eno1}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Down:${color1}${alignr}${downspeed eno1}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Upload:${color1}${alignr}${totalup eno1}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Download:${color1}${alignr}${totaldown eno1}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Ip:${color1} ${alignr}${addr eno1}
 ${color5}${stippled_hr}${font}${voffset -0}
 ${else}${if_existing /proc/net/route eth0}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}eth0
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Up:${color1}${alignr}${upspeed eth0}
@@ -181,14 +186,21 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Upload:${color1}$
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Download:${color1}${alignr}${totaldown tun0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Ip:${color1} ${alignr}${addr tun0}
 ${color5}${stippled_hr}${font}${voffset -0}
-${else}${if_existing /proc/net/route eth1}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}eth1
+${else}${if_existing /proc/net/route eth1}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}enp3s0f3u3
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Up:${color1}${alignr}${upspeed enp3s0f3u3}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Down:${color1}${alignr}${downspeed enp3s0f3u3}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Upload:${color1}${alignr}${totalup enp3s0f3u3}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Download:${color1}${alignr}${totaldown enp3s0f3u3}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Ip:${color1} ${alignr}${addr enp3s0f3u3}
+${color5}${stippled_hr}${font}${voffset -0}
+${else}${if_existing /proc/net/route eth0}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Card:${color1}${alignr}eth1
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Up:${color1}${alignr}${upspeed eth1}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Down:${color1}${alignr}${downspeed eth1}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Upload:${color1}${alignr}${totalup eth1}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Download:${color1}${alignr}${totaldown eth1}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}  Ip:${color1} ${alignr}${addr eth1}
-${color5}${stippled_hr}${font}${voffset -0}
-${endif}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Open ports:${color1}   ${tcp_portmon 1 65535 count}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Ports ${color5}${stippled_hr}${font}${voffset -0}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Open ports:${color1} ${tcp_portmon 1 65535 count}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}IP${alignr}DPORT
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}${tcp_portmon 1 65535 rip  0}${alignr 1}${tcp_portmon 1 65535 rport  0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}${tcp_portmon 1 65535 rip  1}${alignr 1}${tcp_portmon 1 65535 rport  1}

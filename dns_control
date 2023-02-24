@@ -80,9 +80,9 @@ arr[21]="tr";
 
 
 
-if [ ! -d $Mykodachi_path/tmp ]; then
-	mkdir -p $Mykodachi_path/tmp;
-	chown $LOGED_USER.$LOGED_USER $Mykodachi_path/tmp;
+if [ ! -d /tmp ]; then
+	mkdir -p /tmp;
+	chown $LOGED_USER.$LOGED_USER /tmp;
 fi;
 
 
@@ -90,7 +90,7 @@ fi;
 NEW_UUID="D4k1arhRSKjt0emBOYT0YKg6bwC9gTBH@";
 me=$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")
 
-lockdir=$Mykodachi_path/tmp/$NEW_UUID$me
+lockdir=/tmp/$NEW_UUID$me
 mkdir $lockdir || {
     echo "lock directory exists. exiting"
     exit 1
@@ -99,7 +99,7 @@ mkdir $lockdir || {
 trap "rmdir $lockdir" EXIT INT KILL TERM 
 
 # rest of script here
-sudo chown $LOGED_USER.$LOGED_USER $Mykodachi_path/tmp/$NEW_UUID$me;
+sudo chown $LOGED_USER.$LOGED_USER/tmp/$NEW_UUID$me;
 	
 # end script locker
 
@@ -823,14 +823,14 @@ function waitForTor2beready()
 				if [[ $tornullipcounter -le 5 ]]
 				then
 					# for some how some tor nodes are banned
-					sudo bash $Mykodachi_path/torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
+					sudo bash /torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
 					print_error "Try to switch TOR to: $COuntryCode tornullipcounter is: $tornullipcounter";	
 				fi
 												
 				if [[ $tornullipcounter > 5 ]]
 				then
 					# for some how some tor nodes are banned
-					sudo bash $Mykodachi_path/torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
+					sudo bash /torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
 					print_error "Try to switch TOR to: $COuntryCode tornullipcounter is: $tornullipcounter";	
 					sleep 1							
 					sudo /etc/init.d/tor restart;
@@ -983,7 +983,7 @@ while true; do
 					writeToJason "Yes" "TORonifVPNisoff";
 					notify-send -i $notifyIcon "Changing TOR setting to start without VPN"; 	
 					sleep 3;
-					sudo bash $Mykodachi_path/torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
+					sudo bash /torforce off|(echo authenticate '"Auo2@s3ks@Wdq"';echo SETCONF ExitNodes={$COuntryCode};echo SETCONF StrictNodes=1 ;echo signal newnym; echo quit) | nc localhost 9060
 					print_error "First try to switch TOR to: $COuntryCode";
 					sleep 3;													
 				fi	
@@ -1119,7 +1119,7 @@ while true; do
 		then
 			#Reset dns at startup
 			chk1=`cksum /etc/resolv.conf | awk -F" " '{print $1}'`
-			chk2=`cksum $Mykodachi_path/currentDNS | awk -F" " '{print $1}'`
+			chk2=`cksum /currentDNS | awk -F" " '{print $1}'`
 
 			if [ ! $chk1 -eq $chk2 ]
 			then

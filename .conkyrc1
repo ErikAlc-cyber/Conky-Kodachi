@@ -23,7 +23,7 @@
 
 
 # Specific
-gap_x 600
+gap_x 550
 gap_y 10
 update_interval 15
 minimum_size 220 0
@@ -42,11 +42,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 3f43ff  #Info  letter color
-color2 000000  #Label letter color
-color3 000000  #Title letter color
-color4 FFFFFF  #None
-color5 ebedf1  #separator color
+color1 white  #Info  letter color
+color2 FFA300  #Label letter color
+color3 FFA300  #Title letter color
+color4 EAEAEA  #None
+color5 grey  #separator color
 
 own_window_transparent yes
 own_window_type normal
@@ -96,14 +96,14 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}2. ${top name 2}${a
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}3. ${top name 3}${alignr}${top cpu 3}%
 ${goto 5}${loadgraph 10,220 666666 666666}
 ${color5}${stippled_hr}${font}${voffset -0}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}MEM ${color1}${exec free | awk '/Mem/{printf("%.2f%"), $3/$2*100} /buffers\/cache/{printf(", buffers: %.2f%"), $3/$2*100}' }${color1}${alignr}${exec cat kodachi.json |jq -r .memoryused|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}1. ${top_mem name 1}${alignr}${top_mem mem 1}%
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}2. ${top_mem name 2}${alignr}${top_mem mem 2}%
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}3. ${top_mem name 3}${alignr}${top_mem mem 3}%
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}MEM ${color1}${alignr}${exec free | awk '/Mem/{printf("%.2f%"), $3/$2*100} /buffers\/cache/{printf(", buffers: %.2f%"), $3/$2*100}' }
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}1. ${top_mem name 1}${alignr}${top_mem mem_res 1}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}2. ${top_mem name 2}${alignr}${top_mem mem_res 2}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}3. ${top_mem name 3}${alignr}${top_mem mem_res 3}
 ${color5}${stippled_hr}${font}${voffset -0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}DISKS
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}1. used:${alignr}${fs_used /home}${color2} /home
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}2. used:${alignr}${fs_used /}${color2} /
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}1.${color2}/home${color4} used: ${alignr}${color1}${fs_used /home}/${fs_free /home}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color1}2.${color2}/ ${color4}used:${alignr}${color1}${fs_used /}/${fs_free /home}
 ${goto 5}${diskiograph 10,220 666666 666666}#${voffset -40}
 #${image /home/$USER/.kbase/.conky/eeds.png -p 95,20 -s 57x54}
 

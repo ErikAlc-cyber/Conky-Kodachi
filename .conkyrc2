@@ -41,11 +41,11 @@ temperature_unit celsius
 no_buffers yes
 text_buffer_size 256
 default_color FFFFFF
-color1 3f43ff  #Info  letter color
-color2 000000  #Label letter color
-color3 000000  #Title letter color
-color4 FFFFFF  #None
-color5 ebedf1  #separator color
+color1 white  #Info  letter color
+color2 FFA300  #Label letter color
+color3 FFA300  #Title letter color
+color4 EAEAEA  #None
+color5 grey  #separator color
 
 
 
@@ -114,17 +114,17 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Ping:${color1}${ali
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Bandwidth:${color1}${alignr}${exec cat kodachi.json |jq -r .kodachivpnbandwidth|xargs} GB
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Profile: ${color1}${alignr}${exec cat kodachi.json |jq -r .VPNprofile|xargs}
 #${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}ISP IP: ${color1}${exec cat kodachi.json |jq -r .OriginalISPIPAddress|tr -d " \t\n\r"}${alignr}${color1}${exec cat kodachi.json | jq -r .OriginalISPCountry|tr -d " \t\n\r"}
-$else${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}VPN${alignr}${color red}!
+$else${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}VPN${alignr}${color red}Inactive
 #${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}ISP IP: ${color1}${exec cat kodachi.json |jq -r .OriginalISPIPAddress|tr -d " \t\n\r"}${alignr}${color1}${exec cat kodachi.json | jq -r .OriginalISPCountry|tr -d " \t\n\r"}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Status: ${color1}${alignr}${exec cat kodachi.json |jq -r .SecurityStatus|tr -d " \t\n\r"}
 $endif${color5}${stippled_hr}${font}${voffset -0}
 #${if_running tor}${image /home/$USER/.kbase/.conky/images/tor.png -p 65,70 -s 64x64}
 ${if_running tor}${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}TOR${color1}${alignr}${color3}Age: ${color1}${exec ps -eo pid,command,etime|grep 'tor'|grep 'bin'|cut -d r -f 4|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}${color1}${exec cat kodachi.json |jq -r .TORIP|xargs}${alignr}${color1}${exec cat kodachi.json |jq -r .TORCountry|xargs }
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}${color1}${exec cat kodachi.json |jq -r .TORRIFYIP|xargs}${alignr}${color1}${exec cat kodachi.json |jq -r .TORRIFYCountry|xargs }
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Tor without VPN: ${color1}${exec cat kodachi.json |jq -r .TORonifVPNisoff|xargs}${alignr}${color3}Torified OS: ${color1}${alignr}${exec cat kodachi.json | jq -r .Toriffystatus|xargs }
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Excluded eyes: ${alignr}${color1}${exec cat kodachi.json |jq -r .torblock|xargs }
-$else${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Tor${alignr}${color red}!
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}${color1}${exec cat kodachi.json |jq -r .TORIP|xargs}${alignr}${color1}${exec cat kodachi.json |jq -r .TORCountry|xargs }
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}${color1}${exec cat kodachi.json |jq -r .TORRIFYIP|xargs}${alignr}${color1}${exec cat kodachi.json |jq -r .TORRIFYCountry|xargs }
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Tor without VPN: ${color1}${exec cat kodachi.json |jq -r .TORonifVPNisoff|xargs}${alignr}${color3}Torified OS: ${color1}${alignr}${exec cat kodachi.json | jq -r .Toriffystatus|xargs }
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Excluded eyes: ${alignr}${color1}${exec cat kodachi.json |jq -r .torblock|xargs }
+$else${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Tor${alignr}${color red}Inactive
 $endif${color5}${stippled_hr}${font}${voffset -0}
 #${if_existing /home/$USER/.kbase/dns/autodnscrypt}
 ${if_running dnscrypt-proxy}#${image /home/$USER/.kbase/.conky/images/dnson.png -p 105,70 -s 16x16}
@@ -140,14 +140,14 @@ ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Forced DNS:${font L
 #${image /home/$USER/.kbase/.conky/images/dnsoff.png -p 40,340 -s 16x16}
 $endif${color5}${stippled_hr}${font}${voffset -0}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}OS status: ${color1}${font Liberation Sans Narrow:size=10:bold}${exec cat kodachiweb.json | jq -r .isactive|xargs}${alignr}${color3}HWID: ${color1}${exec cat kodachi.json | jq -r .banstatus|xargs} 
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Version: ${color1}${exec cat /home/$USER/.kbase/Globalconfig|grep "Kodachi_version"|cut -d = -f 2|cut -d ';' -f 1|xargs}${alignr}${color3}Latest: ${color1}${exec cat kodachiweb.json |jq -r .version|xargs|tr -d " \t\n\r"}${color red}${exec cat kodachi.json |jq -r .KodachiISOVersionAlert|cut -d : -f 1|xargs|tr -d " \t\n\r"}
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Version: ${color1}${exec cat Globalconfig|grep "Kodachi_version"|cut -d = -f 2|cut -d ';' -f 1|xargs}${alignr}${color3}Latest: ${color1}${exec cat kodachiweb.json |jq -r .version|xargs|tr -d " \t\n\r"}${color red}${exec cat kodachi.json |jq -r .KodachiISOVersionAlert|cut -d : -f 1|xargs|tr -d " \t\n\r"}
 #${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}IP updates in:${color1}${alignr}${exec cat /home/$USER/.kbase/.countfile|wc -l|cut -d . -f 1}${color2}/25
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS boot mode: ${color1}${exec cat kodachi.json | jq -r .boottype|xargs}${alignr}${color3}OS live: ${color1}${exec cat kodachi.json | jq -r .livemode|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS encrypted: ${color1}${exec cat kodachi.json | jq -r .hddencryptstatus|xargs}${alignr}${color3}OS nuked: ${color1}${exec cat kodachi.json | jq -r .osnukestatus|xargs}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS boot mode: ${color1}${exec cat kodachi.json | jq -r .boottype|xargs} ${alignr}${color3}OS live: ${color1}${exec cat kodachi.json | jq -r .livemode|xargs}
+${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS encrypted: ${color1}${exec cat kodachi.json | jq -r .hddencryptstatus|xargs} ${alignr}${color3}OS nuked: ${color1}${exec cat kodachi.json | jq -r .osnukestatus|xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}VPN firewall: ${color1}${exec cat kodachi.json | jq -r .firewallstatus|xargs}${alignr}${color3}IPv6: ${color1}${exec cat kodachi.json | jq -r .ipv6status|xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}OS autologin: ${color1}${exec cat kodachi.json | jq -r .autologinstatus|xargs}${alignr}${color3}Printer cups: ${color1}${exec cat kodachi.json | jq -r .printcapsstatus|xargs}
 ${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Swap encrypted: ${color1}${exec cat kodachi.json | jq -r .swapcryptstatus|xargs}${alignr}${color3}${alignr}${color3}Total swaps: ${color1}${exec  cat kodachi.json | jq -r .totalswap|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}USB guarded: ${color1}${exec cat kodachi.json | jq -r .usbguardstatus|xargs}${alignr}${color3}${alignr}${color3}USB kill: ${color1}${exec cat kodachi.json | jq -r .usbkillstatus|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Auto fonts: ${color1}${exec cat kodachi.json | jq -r .Forcefonts|xargs}${alignr}${color3}Font size: ${color1}${exec cat kodachi.json | jq -r .Screenfontsize|xargs}
-${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Script status: ${color1}${font Liberation Sans Narrow:size=10:bold}${exec cat kodachi.json | jq -r .healthsactionstatus|xargs}${alignr}${color3}Server load: ${color1}${exec cat kodachiweb.json | jq -r .cpuLoad|xargs}
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}USB guarded: ${color1}${exec cat kodachi.json | jq -r .usbguardstatus|xargs}${alignr}${color3}${alignr}${color3}USB kill: ${color1}${exec cat kodachi.json | jq -r .usbkillstatus|xargs}
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color3}Auto fonts: ${color1}${exec cat kodachi.json | jq -r .Forcefonts|xargs}${alignr}${color3}Font size: ${color1}${exec cat kodachi.json | jq -r .Screenfontsize|xargs}
+#${goto 5}${font Liberation Sans Narrow:size=10:bold}${color2}Script status: ${color1}${font Liberation Sans Narrow:size=10:bold}${exec cat kodachi.json | jq -r .healthsactionstatus|xargs}${alignr}${color3}Server load: ${color1}${exec cat kodachiweb.json | jq -r .cpuLoad|xargs}
 
